@@ -1,0 +1,79 @@
+body{
+  margin: 0px;
+  background-color: #B3E5FC;
+}
+
+body *{
+  font-family: 'Indie Flower', cursive;
+}
+
+.body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.card{
+  display: none;
+  margin: auto;
+  background-color: #FFF;
+  width: 500px;
+}
+
+.card .question {
+  padding: 30px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.btn{
+  padding: 30px 25px;
+  text-align: center;
+  border: 0px;
+  font-size: 1.7rem;
+  background-color: #039BE5;
+  color: #fff;
+}
+
+.btn.block{
+  width: 100%;
+}
+
+.btn.yes{
+  background-color: green;
+  color: #FFF;
+}
+
+.btn.no{
+  background-color: green;
+  color: #FFF;
+}
+
+.cover{
+  width: 100%;
+}
+
+input{
+  padding: 30px 15px;
+  width: calc(100% - 30px);
+  color: gray;
+  background-color: #FFF;
+  border: 0px;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.card.active {
+  display: block !important;
+}
+
+@media (max-width: 600px) 
+{
+  .card{
+    margin: auto;
+    background-color: #FFF;
+    width: calc(100% - 30px);
+    height: auto;
+  }
+  
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+	<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+	<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body ng-controller="appController">
+
+	<div class="body">
+
+		<div class="card" ng-class="{'active': count == 1}">
+
+			<!-- <slick autoplay=true autoplay-speed=5000 infinite=true slides-to-show=1 slides-to-scroll=1>
+					<div>
+
+						<img class="cover" src="res/cover-1.jpg">
+
+					</div>
+					<div>
+
+						<img class="cover" src="res/cover-2.jpg">
+
+					</div>
+				</slick> -->
+
+				<div class="question">
+					Qual o seu nome completo?
+				</div>
+
+				<div style="width: 100%;">
+
+					<form ng-submit="step1(nome)">
+
+						<input type="text" ng-model="nome" placeholder="Digite aqui...">
+
+						<button type="submit" class="btn block">CONFIRMAR</button>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<!--  -->
+
+			<div class="card" ng-class="{'active': count == 2}">
+
+				<div class="question">
+					Qual a sua idade?
+				</div>
+
+				<div style="width: 100%;">
+
+					<form ng-submit="step2(idade)">
+
+					<input type="number" ng-model="idade" placeholder="Digite aqui...">
+
+						<button type="submit" class="btn block">CONFIRMAR</button>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<!--  -->
+
+			<div class="card" ng-class="{'active': count == 3}">
+
+				<div class="question">
+					Qual a data de ínicio do namoro?
+				</div>
+
+				<div style="width: 100%;">
+
+					<form ng-submit="step3(inicio)">
+
+						<input type="date" ng-model="inicio" placeholder="Digite aqui...">
+
+						<button type="submit" class="btn block">CONFIRMAR</button>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<!--  -->
+
+			<div class="card" ng-class="{'active': cardFinal}">
+
+				<div ng-show="alice">
+
+					<img class="cover" src="res/cover-1.jpg">
+
+					<div class="question">
+						Tudo isso pra dizer que <br>
+						<strong>Te Amo <span style="color: #F44336">♥</span></strong>
+					</div>
+
+				</div>
+
+				<div ng-show="outros">
+					<div class="question">
+						Esta mensagem não é destinada a você.
+					</div>
+					<button type="button" ng-click="reset()" class="btn block">VOLTAR</button>
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/slick-carousel/slick/slick.js"></script>
+	<script src="bower_components/angular-slick/dist/slick.min.js"></script>
+	<script type="text/javascript">
+
+		angular.module('app', ['slick']).controller('appController', function ($scope, $filter) {
+
+			$scope.data = {};
+			$scope.count = 1;
+
+			$scope.step1 = function(nome){
+
+				$scope.data.nome = nome;
+
+				$scope.count = $scope.count + 1;
+
+			}
+
+			$scope.step2 = function(idade){
+
+				$scope.data.idade = idade;
+
+				$scope.count = $scope.count + 1;
+
+			}
+
+			$scope.step3 = function(inicio){
+
+				$scope.data.inicio = inicio;
+
+				$scope.count = $scope.count + 1;
+
+				$scope.checkFinal();
+
+			}
+
+			$scope.checkFinal = function(){
+
+				console.log($scope.data)
+
+				var nome = $filter('lowercase')($scope.data.nome);
+				var inicio = $filter('lowercase')($scope.data.inicio);
+				var idade = $scope.data.idade;
+
+				if(nome == 'alice santos de oliveira' && idade == 21 && inicio == "Sat Jul 23 2016 00:00:00 GMT-0300 (BRT)" || nome == 'alice santos de oliveira' && idade == 21 && inicio == "Thu Jun 23 2016 00:00:00 GMT-0300 (BRT)"){
+
+					$scope.alice = true;
+
+				}else{
+
+					$scope.outros = true;
+
+				}
+
+				$scope.cardFinal =  true;
+
+			}
+
+			$scope.reset = function(){
+				$scope.count = 1;
+				$scope.outros = false;
+				$scope.cardFinal =  false;
+				$scope.data = {};
+				$scope.nome = "";
+				$scope.inicio = "";
+				$scope.idade = ""
+			}
+
+		})
+
+	</script>
+	</html>
